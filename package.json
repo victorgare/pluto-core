@@ -1,0 +1,26 @@
+{
+  "name": "",
+  "version": "",
+  "scripts": {
+    "build": "tsc",
+    "prune_production": "npm prune --production",
+    "build:production": "npm-run-all -s prestart prune_production",
+    "watch": "tsc --w",
+    "install_extension": "func extensions install",
+    "prestart": "npm-run-all -s build install_extension",
+    "start:host": "func start",
+    "start": "npm-run-all -p watch start:host",
+    "test": "jest --setupFiles dotenv/config"
+  },
+  "description": "",
+  "devDependencies": {
+    "@azure/functions": "^1.0.1-beta1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "ccxt": "^1.18.1210",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13"
+  }
+}
