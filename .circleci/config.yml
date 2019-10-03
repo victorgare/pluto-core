@@ -14,3 +14,4 @@ jobs:
           name: Build production
           command: |
             npm run build:production
+            npm rebuild
