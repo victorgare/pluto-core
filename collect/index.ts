@@ -1,15 +1,10 @@
-import { AzureFunction, Context } from "@azure/functions";
+import { Context } from "@azure/functions";
+import { InversifyContainer } from "../src/inversify.config";
+import { ICollectController } from "../src/lib/interfaces/controller/iCollectController";
+import { TYPES } from "../src/types";
 
-const timerTrigger: AzureFunction = async function(
-  context: Context,
-  myTimer: any
-): Promise<void> {
-  var timeStamp = new Date().toISOString();
-
-  if (myTimer.IsPastDue) {
-    context.log("Timer function is running late!");
-  }
-  context.log("Timer trigger function ran!", timeStamp);
-};
-
-export default timerTrigger;
+export default function(context: Context, myTimer: any): Promise<void> {
+  return InversifyContainer.get<ICollectController>(
+    TYPES.CollectController
+  ).collect();
+}

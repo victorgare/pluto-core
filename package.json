@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "ccxt": "^1.18.1210",
+    "firebase": "^7.0.0",
+    "guid-typescript": "^1.0.9",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
   }
