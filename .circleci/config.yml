@@ -5,8 +5,11 @@ workflows:
       - build
 jobs:
   build:
-    machine:
-      image: ubuntu-1604:201903-01
+    # machine:
+    #   image: ubuntu-1604:201903-01
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:8
     working_directory: ~/pluto-core
     steps:
       - checkout
@@ -14,4 +17,3 @@ jobs:
           name: Build production
           command: |
             npm run build:production
-            npm rebuild
