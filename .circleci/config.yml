@@ -8,7 +8,7 @@ workflows:
             - verify-install
       - deploy-prod:
           requires:
-            - verify-install
+            - build
 
 jobs:
   build:
