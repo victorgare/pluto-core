@@ -71,7 +71,6 @@ jobs:
       - run:
           command: |
             az -v
-            az login -u ${USER_NAME} -p V${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
   deploy-prod:
     machine:
@@ -80,7 +79,9 @@ jobs:
     steps:
       - run:
           name: Deploy if tests pass and branch is Master
-          command: func azure functionapp publish pluto-core
+          command: |
+            az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
+            func azure functionapp publish pluto-core
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
