@@ -71,8 +71,6 @@ jobs:
     executor: azure-cli/default
     steps:
       - azure-cli/install
-      - azure-cli/login-with-user:
-          alternate-tenant: true
       - run:
           command: |
             az -v
