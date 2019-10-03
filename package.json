@@ -2,14 +2,14 @@
   "name": "",
   "version": "",
   "scripts": {
-    "build": "tsc",
+    "build": "npm install && tsc",
     "prune_production": "npm prune --production",
-    "build:production": "npm-run-all -s prestart prune_production",
+    "build:production": "npm run prestart && npm run prune_production",
     "watch": "tsc --w",
     "install_extension": "func extensions install",
-    "prestart": "npm-run-all -s build install_extension",
+    "prestart": "npm run build && npm run install_extension",
     "start:host": "func start",
-    "start": "npm-run-all -p watch start:host",
+    "start": "npm run -p watch && npm run start:host",
     "test": "jest --setupFiles dotenv/config"
   },
   "description": "",
