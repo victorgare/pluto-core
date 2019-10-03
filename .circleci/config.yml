@@ -48,10 +48,12 @@ jobs:
           name: Build production
           command: |
             npm run build:production
-      - run:
-          name: Deploy
-          command: func azure functionapp publish pluto-core
-
+      # - run:
+          # name: Deploy
+          # command: func azure functionapp publish pluto-core
+      
+      - store_artifacts:
+          path: /tmp/artifacts
       - save_cache:
           paths:
             - node_modules
