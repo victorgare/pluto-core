@@ -2,10 +2,10 @@ version: 2.1
 workflows:
   main:
     jobs:
-      - build
-      - verify-install:
+      - verify-install
+      - build:
           requires:
-            - build
+            - verify-install
       - deploy-prod:
           requires:
             - verify-install
