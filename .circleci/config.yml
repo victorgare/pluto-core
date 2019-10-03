@@ -74,6 +74,7 @@ jobs:
       - run:
           command: |
             az -v
+            az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
   deploy-prod:
     machine:
@@ -83,7 +84,6 @@ jobs:
       - run:
           name: Deploy if tests pass and branch is Master
           command: |
-            az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
             func azure functionapp publish pluto-core
 
 orbs:
