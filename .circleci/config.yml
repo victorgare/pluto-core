@@ -1,0 +1,14 @@
+version: 2.1
+workflows:
+  main:
+    jobs:
+      - build
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - run:
+          name: Build production
+          command: |
+            npm run build:production
