@@ -5,11 +5,9 @@ workflows:
       - build
 jobs:
   build:
-    # machine:
-    #   image: ubuntu-1604:201903-01
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8
+    machine:
+      image: ubuntu-1604:201903-01
+
     working_directory: ~/pluto-core
     steps:
       - checkout
@@ -19,7 +17,19 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run:
+          name: Install  Node.js 8.9.1 with build in nvm tool
+          # https://www.cloudesire.com/how-to-upgrade-node-on-circleci-machine-executor/
+          command: |
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install v8.11.3 && nvm use v8.11.3 && nvm alias default v8.11.3
+            node -v
 
+      - run:
+          name: Check node version
+          command: |
+            node -v
       - run:
           name: Build production
           command: |
