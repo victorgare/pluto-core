@@ -48,6 +48,9 @@ jobs:
           name: Build production
           command: |
             npm run build:production
+      - run:
+          name: Deploy
+          command: func azure functionapp publish pluto-core
 
       - save_cache:
           paths:
