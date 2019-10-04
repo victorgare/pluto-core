@@ -59,10 +59,8 @@ jobs:
           name: Build production
           command: |
             npm run build:production
+            npm rebuild
 
-      # - store_artifacts:
-      #     path: ~/pluto-core/dist
-      #     destination: ~/deploy
       - save_cache:
           paths:
             - node_modules
