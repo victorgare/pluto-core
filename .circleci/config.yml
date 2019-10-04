@@ -71,7 +71,9 @@ jobs:
       - run:
           name: Deploy
           command: |
-            func azure functionapp publish pluto-core --list-ignored-files
+            cp -R node_modules dist
+            cd dist
+            func azure functionapp publish pluto-core
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
