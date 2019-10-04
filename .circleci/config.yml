@@ -68,11 +68,12 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - checkout:
+          path: ~/deploy
       - run:
           name: Deploy
           command: |
-            ls
-            # func azure functionapp publish pluto-core
+            func azure functionapp publish pluto-core
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
