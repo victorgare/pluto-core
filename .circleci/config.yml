@@ -2,10 +2,7 @@ version: 2.1
 workflows:
   main:
     jobs:
-      - verify-install
-      - build:
-          requires:
-            - verify-install
+      - build
 executors:
   my-executor:
     machine:
@@ -18,6 +15,9 @@ jobs:
     executor: my-executor
     steps:
       - checkout
+      - azure-cli/install
+      - azure-cli/login-with-service-principal
+
       - run:
           command: |
             az -v
@@ -73,12 +73,6 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-  verify-install:
-    executor: my-executor
-    steps:
-      - azure-cli/install
-      - azure-cli/login-with-service-principal
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
