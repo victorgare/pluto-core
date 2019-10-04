@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "version": "",
+  "name": "pluto-core",
+  "version": "1.0.0",
   "scripts": {
     "build": "npm install && tsc",
     "prune_production": "npm prune --production",

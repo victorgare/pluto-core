@@ -4,3 +4,6 @@
 .vscode
 local.settings.json
 test
+src
+*.md
+.circleci
