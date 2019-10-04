@@ -3,9 +3,12 @@ workflows:
   main:
     jobs:
       - verify-install
-      - build:
+      - login-to-azure:
           requires:
             - verify-install
+      - build:
+          requires:
+            - login-to-azure
       - deploy-prod:
           requires:
             - build
@@ -76,6 +79,14 @@ jobs:
             az -v
             az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
+  login-to-azure:
+    executor: azure-cli/default
+    steps:
+      - azure-cli/login-with-service-principal
+      - run:
+          command: az resource list
+          name: List resources of tenant stored as `AZURE_SP_TENANT` env var
+
   deploy-prod:
     machine:
       image: ubuntu-1604:201903-01
