@@ -21,7 +21,6 @@ jobs:
       - run:
           command: |
             az -v
-            az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
 
       - restore_cache:
