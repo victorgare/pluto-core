@@ -60,19 +60,18 @@ jobs:
           command: |
             npm run build:production
 
-      - store_artifacts:
-          path: ~/pluto-core/dist
-          destination: ~/deploy
+      # - store_artifacts:
+      #     path: ~/pluto-core/dist
+      #     destination: ~/deploy
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - checkout:
-          path: ~/deploy
       - run:
           name: Deploy
           command: |
+            cd dist
             func azure functionapp publish pluto-core
 
 orbs:
