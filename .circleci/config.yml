@@ -10,19 +10,19 @@ executors:
   my-executor:
     machine:
       image: ubuntu-1604:201903-01
+      docker_layer_caching: true
     working_directory: ~/pluto-core
 
 jobs:
   build:
     executor: my-executor
     steps:
+      - checkout
       - run:
           command: |
             az -v
-            az resource list
             az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
-      - checkout
 
       - restore_cache:
           keys:
