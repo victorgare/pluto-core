@@ -60,11 +60,6 @@ jobs:
           command: |
             npm run build:production
 
-      - run:
-          name: Deploy
-          command: |
-            func azure functionapp publish pluto-core
-
       - store_artifacts:
           path: ~/pluto-core/dist
           destination: ~/deploy
@@ -72,6 +67,12 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Deploy
+          command: |
+            cd ~/deploy
+            func azure functionapp publish pluto-core
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
