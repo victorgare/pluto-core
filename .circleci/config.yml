@@ -59,7 +59,7 @@ jobs:
           name: Build production
           command: |
             npm run build:production
-            npm rebuild --target=10.16.0 --target_platform=linux --target_arch=x64 --target_libc=glibc --update-binary
+            npm rebuild --target=8.0.1 --target_platform=linux --target_arch=x64 --target_libc=glibc --update-binary
 
       - save_cache:
           paths:
