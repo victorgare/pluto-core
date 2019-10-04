@@ -6,12 +6,15 @@ workflows:
       - build:
           requires:
             - verify-install
-
-jobs:
-  build:
+executors:
+  my-executor:
     machine:
       image: ubuntu-1604:201903-01
     working_directory: ~/pluto-core
+
+jobs:
+  build:
+    executor: my-executor
     steps:
       - run:
           command: |
@@ -72,7 +75,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
   verify-install:
-    executor: azure-cli/default
+    executor: my-executor
     steps:
       - azure-cli/install
       - azure-cli/login-with-service-principal
