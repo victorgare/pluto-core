@@ -5,7 +5,9 @@
     "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=plutostorage;AccountKey=+V72+++vo6l9EdCztLhZZsUcsF1hEPzm27Y7v4tOj48Wc45/E6VWh8G2lLe+sRCaAv0JogFPER1PnsFo4AD1PA==",
     "FUNCTIONS_EXTENSION_VERSION": "~2",
     "WEBSITE_NODE_DEFAULT_VERSION": "10.14.1",
-    "APPINSIGHTS_INSTRUMENTATIONKEY": "43a789c6-566a-42cb-be8e-11541074a354"
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "43a789c6-566a-42cb-be8e-11541074a354",
+    "WEBSITE_RUN_FROM_PACKAGE": "https://plutostorage.blob.core.windows.net/function-releases/20191003130513-81791d00-aadb-4936-ba3f-210707d3fb66.zip?sv=2018-03-28&sr=b&sig=QxEXZo04rzDy4kSTkhObqfMhSU7FYuXizIaqyOZenuM%3D&st=2019-10-03T13%3A01%3A05Z&se=2029-10-03T13%3A06%3A05Z&sp=r",
+    "AzureWebJobs.collectHttp.Disabled": "true"
   },
   "ConnectionStrings": {}
 }
