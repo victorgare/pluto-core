@@ -72,7 +72,7 @@ jobs:
           name: Deploy
           command: |
             cd dist
-            func azure functionapp publish pluto-core
+            func azure functionapp publish pluto-core --list-ignored-files
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
