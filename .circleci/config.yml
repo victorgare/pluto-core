@@ -77,14 +77,15 @@ jobs:
       - run:
           command: |
             az -v
-            az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
   login-to-azure:
     executor: azure-cli/default
     steps:
       - azure-cli/login-with-service-principal
       - run:
-          command: az resource list
+          command: |
+            az resource list
+            az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: List resources of tenant stored as `AZURE_SP_TENANT` env var
 
   deploy-prod:
