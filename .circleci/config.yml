@@ -6,9 +6,6 @@ workflows:
       - build:
           requires:
             - verify-install
-      - deploy-prod:
-          requires:
-            - build
 
 jobs:
   build:
@@ -55,10 +52,12 @@ jobs:
           name: Build production
           command: |
             npm run build:production
-          # name: Deploy
-          # command: func azure functionapp publish pluto-core
 
-      # - run:
+      - run:
+          name: Deploy
+          command: |
+            func azure functionapp publish pluto-core
+
       - store_artifacts:
           path: ~/pluto-core/dist
           destination: ~/deploy
@@ -78,15 +77,6 @@ jobs:
             az resource list
             az functionapp deployment user set --user-name ${USER_NAME} --password ${USER_PASSWORD}
           name: Verify Azure CLI is installed nad deploy
-  deploy-prod:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory: /tmp/pluto-core
-    steps:
-      - run:
-          name: Deploy if tests pass and branch is Master
-          command: |
-            func azure functionapp publish pluto-core
 
 orbs:
   azure-cli: circleci/azure-cli@1.0.0
