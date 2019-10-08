@@ -18,4 +18,6 @@ export class Opportunity extends BaseEntity {
   sellAtPrice: number;
   spreadValue: number;
   spreadPercentage: number;
+  maxBuyAmountWithVolume: number;
+  maxSellAmountWithVolume: number;
 }

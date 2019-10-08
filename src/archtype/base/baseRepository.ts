@@ -11,7 +11,6 @@ export class BaseRepository implements IBaseRepository {
    *
    */
   constructor() {
-    debugger;
     var firebaseConfig = {
       apiKey: process.env.APPSETTING_FIREBASE_APIKEY,
       authDomain: process.env.APPSETTING_FIREBASE_AUTHDOMAIN,
