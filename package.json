@@ -9,7 +9,7 @@
     "install_extension": "func extensions install",
     "prestart": "npm run build && npm run install_extension",
     "start:host": "func start",
-    "start": "npm run -p watch && npm run start:host",
+    "start": "npm run prestart && npm run start:host",
     "test": "jest --setupFiles dotenv/config"
   },
   "description": "",
