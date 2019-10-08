@@ -26,20 +26,18 @@ export class CollectController extends BaseClass implements ICollectController {
     const poloniex: ccxt.Exchange = new ccxt.poloniex();
     const hitbtc2: ccxt.Exchange = new ccxt.hitbtc2();
     const foxbit: ccxt.Exchange = new ccxt.foxbit();
-    const coinmarketcap: ccxt.Exchange = new ccxt.coinmarketcap();
     const bittrex: ccxt.Exchange = new ccxt.bittrex();
 
     let exchanges = [
       mercadoBtc,
       braziliex,
+      foxbit,
       binance,
       binanceje,
       binanceus,
       kraken,
       poloniex,
       hitbtc2,
-      foxbit,
-      coinmarketcap,
       bittrex
     ];
 

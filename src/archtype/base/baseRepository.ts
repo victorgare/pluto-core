@@ -11,18 +11,24 @@ export class BaseRepository implements IBaseRepository {
    *
    */
   constructor() {
+    debugger;
     var firebaseConfig = {
-      apiKey: "AIzaSyC4IVFiJfJNToIwy0DuezU_WpC6imPKE9k",
-      authDomain: "pluto-core.firebaseapp.com",
-      databaseURL: "https://pluto-core.firebaseio.com",
-      projectId: "pluto-core",
-      storageBucket: "pluto-core.appspot.com",
-      messagingSenderId: "99926566159",
-      appId: "1:99926566159:web:e8021e9b68dd608a50ca7a",
-      measurementId: "G-ZF9PQH5Z85"
+      apiKey: process.env.APPSETTING_FIREBASE_APIKEY,
+      authDomain: process.env.APPSETTING_FIREBASE_AUTHDOMAIN,
+      databaseURL: process.env.APPSETTING_FIREBASE_DATABASEURL,
+      projectId: process.env.APPSETTING_FIREBASE_PROJECTID,
+      storageBucket: process.env.APPSETTING_FIREBASE_STORAGEBUCKET,
+      messagingSenderId: process.env.APPSETTING_FIREBASE_MESSAGINGSENDERID,
+      appId: process.env.APPSETTING_FIREBASE_APPID,
+      measurementId: process.env.APPSETTING_FIREBASE_MEASUREMENTID
     };
 
-    this._app = firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      this._app = firebase.initializeApp(firebaseConfig);
+    } else {
+      this._app = firebase.apps[0];
+    }
+
     this._firestore = this._app.firestore();
   }
 }

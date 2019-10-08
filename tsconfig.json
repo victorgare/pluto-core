@@ -6,8 +6,8 @@
     "rootDir": ".",
     "sourceMap": true,
     "strict": false,
-    "types": ["reflect-metadata"],
-    "moduleResolution":"node",
+    "types": ["reflect-metadata", "node"],
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   }

@@ -6,6 +6,7 @@ import { IOpportunityRepository } from "../interfaces/repository/IOpportunityRep
 import { inject, injectable } from "inversify";
 import { TYPES } from "../../types";
 
+const limit: number = 10;
 @injectable()
 export class AnalyzerService extends BaseClass implements IAnalyzerService {
   private readonly _opportunityRepository: IOpportunityRepository;
@@ -29,16 +30,22 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
     try {
       for (const pair of pairs) {
         // só iremos trabalhar com pares com BRL e USD por enquanto
-        if (pair.includes("BRL") || pair.includes("USD")) {
+        if (
+          pair.endsWith("BRL") ||
+          pair.endsWith("USD") ||
+          pair.endsWith("USDT")
+        ) {
           const secondPair = (await secondExchange.loadMarkets())[pair];
 
           // só devemos fazer as analises, caso a segunda exchange possua o mesmo pair
           if (secondPair) {
             const firstPairOrderBook = await firstExchange.fetchOrderBook(
-              secondPair.symbol
+              secondPair.symbol,
+              limit
             );
             const secondPairOrderBook = await secondExchange.fetchOrderBook(
-              secondPair.symbol
+              secondPair.symbol,
+              limit
             );
 
             let result = await this.compareBooks(
@@ -61,7 +68,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
             );
 
             if (result.length > 0) {
-              this._opportunityRepository.insertOpportunities(result);
+              // this._opportunityRepository.insertOpportunities(result);
             }
           }
         }
@@ -105,19 +112,19 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
       if (difference > 10 || percentage > 1) {
         // o volume o ask deve ser maior que o volume do bid
         if (volumeAsk >= volumeBid) {
-          result.push(<Opportunity>{
-            buyCoin: splitedPair[0],
-            sellCoin: splitedPair[1],
-            butAtPrice: priceAsk,
-            sellAtPrice: priceBid,
-            spreadValue: difference,
-            spreadPercentage: percentage,
-            buyAtExchange: firstExchange.name,
-            sellAtExchange: secondExchange.name
-          });
+          result.push(
+            new Opportunity({
+              buyCoin: splitedPair[0],
+              sellCoin: splitedPair[1],
+              butAtPrice: priceAsk,
+              sellAtPrice: priceBid,
+              spreadValue: difference,
+              spreadPercentage: percentage,
+              buyAtExchange: firstExchange.name,
+              sellAtExchange: secondExchange.name
+            })
+          );
         }
-      } else {
-        break;
       }
 
       bidIndex++;

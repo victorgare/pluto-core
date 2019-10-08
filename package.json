@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "ccxt": "^1.18.1210",
+    "dotenv": "^8.1.0",
     "firebase": "^7.0.0",
     "grpc": "^1.24.0",
     "guid-typescript": "^1.0.9",
