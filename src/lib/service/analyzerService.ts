@@ -215,7 +215,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
     }
 
     if (result.length > 0) {
-      debugger;
+      this._opportunityRepository.insertOpportunities(result);
     }
   }
 }
