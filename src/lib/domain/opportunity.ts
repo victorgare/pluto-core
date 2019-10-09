@@ -14,7 +14,7 @@ export class Opportunity extends BaseEntity {
   sellAtExchange: string;
   buyCoin: string;
   sellCoin: string;
-  butAtPrice: number;
+  buyAtPrice: number;
   sellAtPrice: number;
   spreadValue: number;
   spreadPercentage: number;
