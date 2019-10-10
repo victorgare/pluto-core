@@ -22,8 +22,8 @@ export class CollectController extends BaseClass implements ICollectController {
     // const braziliex: ccxt.Exchange = new ccxt.braziliex();
     // const foxbit: ccxt.Exchange = new ccxt.foxbit();
     const binance: ccxt.Exchange = new ccxt.binance();
-    // const binanceje: ccxt.Exchange = new ccxt.binanceje();
-    // const binanceus: ccxt.Exchange = new ccxt.binanceus();
+    const binanceje: ccxt.Exchange = new ccxt.binanceje();
+    const binanceus: ccxt.Exchange = new ccxt.binanceus();
     const kraken: ccxt.Exchange = new ccxt.kraken();
     const poloniex: ccxt.Exchange = new ccxt.poloniex();
     const hitbtc2: ccxt.Exchange = new ccxt.hitbtc2();
@@ -35,8 +35,8 @@ export class CollectController extends BaseClass implements ICollectController {
       // braziliex,
       // foxbit,
       binance,
-      // binanceje,
-      // binanceus,
+      binanceje,
+      binanceus,
       kraken,
       poloniex,
       hitbtc2,

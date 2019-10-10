@@ -53,6 +53,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
     secondEntry: Analyze
   ): Promise<void> {
     let result: Opportunity[] = [];
+
     for (const firstEntryOrderBook of firstEntry.orderBook) {
       for (const ask of firstEntryOrderBook.orderBook.asks) {
         if (!ask && ask.length < 2) {
@@ -60,7 +61,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
         }
         // encontra o orderbook baseado no pair
         const secondEntryOrderBook = secondEntry.orderBook.find(item => {
-          item.market.symbol === firstEntryOrderBook.market.symbol;
+          return item.marketKey === firstEntryOrderBook.marketKey;
         });
 
         // só continua se encontrou o pair
@@ -69,6 +70,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
             if (!bid && bid.length < 2) {
               continue;
             }
+
             const priceAsk = ask[0];
             const priceBid = bid[0];
             const volumeAsk = ask[1];
