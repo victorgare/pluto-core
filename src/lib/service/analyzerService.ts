@@ -56,7 +56,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
 
     for (const firstEntryOrderBook of firstEntry.orderBook) {
       for (const ask of firstEntryOrderBook.orderBook.asks) {
-        if (!ask && ask.length < 2) {
+        if (!ask && ask.length < 2 && ask[1] <= 0) {
           continue;
         }
         // encontra o orderbook baseado no pair
@@ -67,7 +67,7 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
         // só continua se encontrou o pair
         if (secondEntryOrderBook) {
           for (const bid of secondEntryOrderBook.orderBook.bids) {
-            if (!bid && bid.length < 2) {
+            if (!bid && bid.length < 2 && bid[1] <= 0) {
               continue;
             }
 
@@ -83,7 +83,10 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
             const percentage =
               ((maxSell - maxBuy) / ((maxBuy + maxSell) / 2)) * 100;
 
-            if (difference > 10 || percentage > 1) {
+            if (difference > 10 || (percentage > 1 && difference > 0)) {
+              // remove o volume do ASK do bid para que nao interfira nas proximas analises
+              bid[1] = volumeBid - volumeAsk;
+
               const splitedPair = firstEntryOrderBook.marketKey.split("/");
               result.push(
                 new Opportunity({
