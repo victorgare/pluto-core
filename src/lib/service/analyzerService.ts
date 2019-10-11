@@ -118,8 +118,8 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
             const percentage =
               ((maxSell - maxBuy) / ((maxBuy + maxSell) / 2)) * 100;
 
-            // o valor tem que ser maior q 5 dolares de spread
-            if (difference > 5) {
+            // o valor tem que ser maior q 5 dolares de spread e 0.5%
+            if (difference > 5 && percentage >= 0.5) {
               // remove o volume do ASK do bid para que nao interfira nas proximas analises
               bid[1] = volumeBid - volumeAsk;
 
