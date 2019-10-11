@@ -7,6 +7,7 @@ import { injectable } from "inversify";
 export class BaseRepository implements IBaseRepository {
   protected readonly _app: firebase.app.App;
   protected readonly _firestore: firebase.firestore.Firestore;
+  protected readonly _collection: firebase.firestore.CollectionReference;
   /**
    *
    */
@@ -29,5 +30,6 @@ export class BaseRepository implements IBaseRepository {
     }
 
     this._firestore = this._app.firestore();
+    this._collection = this._firestore.collection("pluto");
   }
 }

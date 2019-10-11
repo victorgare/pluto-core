@@ -6,20 +6,24 @@ import { injectable } from "inversify";
 @injectable()
 export class OpportunityRepository extends BaseRepository
   implements IOpportunityRepository {
-  private readonly _collection: firebase.firestore.CollectionReference;
+  private readonly _document: firebase.firestore.DocumentReference;
   /**
    *
    */
   constructor() {
     super();
-    this._collection = this._firestore.collection("opportunities");
+
+    this._document = this._collection.doc("opportunities");
   }
 
   public async insertOpportunities(
     opportunities: Opportunity[]
   ): Promise<void> {
+    debugger;
     for (const opportunity of opportunities) {
-      this._collection.add(opportunity);
+      this._document
+        .collection("opportunities")
+        .add(Object.assign({}, opportunity));
     }
   }
 }

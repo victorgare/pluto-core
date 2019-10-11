@@ -19,9 +19,11 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
+    "@types/node": "^12.7.12",
     "ccxt": "^1.18.1210",
     "dotenv": "^8.1.0",
     "firebase": "^7.0.0",
+    "firebase-admin": "^8.6.0",
     "grpc": "^1.24.0",
     "guid-typescript": "^1.0.9",
     "inversify": "^5.0.1",
