@@ -4,6 +4,21 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "runFunctionHost",
+      "type": "func",
+      "command": "host start --debug VSCode",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": "$func-watch",
+      "options": {
+        "env": {
+          "languageWorkers__node__arguments": "--inspect=5858"
+        }
+      }
+    },
+    {
       "type": "npm",
       "script": "build",
       "problemMatcher": "$tsc"
