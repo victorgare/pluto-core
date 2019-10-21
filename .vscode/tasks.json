@@ -4,7 +4,12 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "buildAndDebug",
+      "dependsOn": ["npmBuild", "runFunctionHost"]
+    },
+    {
       "label": "runFunctionHost",
+      "dependsOn": ["npmBuild"],
       "type": "func",
       "command": "host start --debug VSCode",
       "isBackground": true,
@@ -19,6 +24,7 @@
       }
     },
     {
+      "label": "npmBuild",
       "type": "npm",
       "script": "build",
       "problemMatcher": "$tsc"

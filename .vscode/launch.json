@@ -8,6 +8,7 @@
       "name": "Attach to Node Functions",
       "type": "node",
       "request": "attach",
+      "stopOnEntry": true,
       "port": 5858,
       "preLaunchTask": "runFunctionHost"
     }

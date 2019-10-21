@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "name": "getInfo",
+      "type": "activityTrigger",
+      "direction": "in",
+      "activity": "getInfo"
+    }
+  ],
+  "scriptFile": "../dist/functionGetInfo/index.js"
+}

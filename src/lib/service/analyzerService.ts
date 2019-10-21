@@ -23,31 +23,42 @@ export class AnalyzerService extends BaseClass implements IAnalyzerService {
   }
 
   public async getInfo(exchange: ccxt.Exchange): Promise<Analyze> {
-    const markets = await exchange.loadMarkets();
-    const marketsKeys = Object.keys(markets).filter(item => {
-      return (
-        (item.endsWith("/BRL") ||
-          item.endsWith("/USD") ||
-          item.endsWith("/USDT")) &&
-        !(
-          item.startsWith("BRL/") ||
-          item.startsWith("USD/") ||
-          item.startsWith("USDT/")
-        )
-      );
-    });
-
     let ordersBooks: OrderBook[] = [];
-    for (const marketKey of marketsKeys) {
-      const market = markets[marketKey];
-      if (market) {
-        const orderBook = await exchange.fetchOrderBook(market.symbol, limit);
-        ordersBooks.push(<OrderBook>{
-          market: markets,
-          marketKey: marketKey,
-          orderBook: orderBook
-        });
+    try {
+      const markets = await exchange.loadMarkets();
+      const marketsKeys = Object.keys(markets).filter(item => {
+        return (
+          (item.endsWith("/BRL") ||
+            item.endsWith("/USD") ||
+            item.endsWith("/USDT")) &&
+          !(
+            item.startsWith("BRL/") ||
+            item.startsWith("USD/") ||
+            item.startsWith("USDT/")
+          )
+        );
+      });
+
+      try {
+        for (const marketKey of marketsKeys) {
+          const market = markets[marketKey];
+          if (market) {
+            const orderBook = await exchange.fetchOrderBook(
+              market.symbol,
+              limit
+            );
+            ordersBooks.push(<OrderBook>{
+              market: markets,
+              marketKey: marketKey,
+              orderBook: orderBook
+            });
+          }
+        }
+      } catch (error) {
+        console.log(error);
       }
+    } catch (error) {
+      console.log(error);
     }
 
     return new Analyze({

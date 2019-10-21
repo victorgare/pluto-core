@@ -1,0 +1,11 @@
+{
+  "bindings": [
+    {
+      "name": "orchestrator",
+      "type": "orchestrationTrigger",
+      "direction": "in",
+      "orchestration": "orchestrator"
+    }
+  ],
+  "scriptFile": "../dist/functionOrchestrator/index.js"
+}
